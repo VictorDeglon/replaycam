@@ -37,11 +37,20 @@ export interface CameraResult {
 }
 
 async function tryGetUserMedia(preset: QualityPreset, facing: FacingMode, mic: boolean): Promise<MediaStream> {
+  // Presets are defined as landscape (e.g. 3840x2160). Asking for that
+  // verbatim on a phone held in portrait makes some browsers hand back a
+  // landscape-cropped feed, which then gets blown up hugely by object-fit:
+  // cover to fill a tall screen — that's what shows up as "zoomed in".
+  // Swap the ideal dimensions to match the device's actual orientation.
+  const portrait = window.innerHeight >= window.innerWidth;
+  const idealWidth = portrait ? preset.height : preset.width;
+  const idealHeight = portrait ? preset.width : preset.height;
+
   return navigator.mediaDevices.getUserMedia({
     video: {
       facingMode: facing,
-      width: { ideal: preset.width },
-      height: { ideal: preset.height },
+      width: { ideal: idealWidth },
+      height: { ideal: idealHeight },
       frameRate: { ideal: preset.frameRate }
     },
     audio: mic
