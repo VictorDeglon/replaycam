@@ -28,7 +28,7 @@ async function getFFmpeg(onLog?: (msg: string) => void): Promise<FFmpeg> {
     ffmpegPromise = (async () => {
       const ffmpeg = new FFmpeg();
       if (onLog) ffmpeg.on('log', ({ message }) => onLog(message));
-      const base = `${location.origin}/ffmpeg`;
+      const base = `${location.origin}${import.meta.env.BASE_URL}ffmpeg`;
       const [coreURL, wasmURL] = await Promise.all([
         toBlobURL(`${base}/ffmpeg-core.js`, 'text/javascript'),
         toBlobURL(`${base}/ffmpeg-core.wasm`, 'application/wasm')
