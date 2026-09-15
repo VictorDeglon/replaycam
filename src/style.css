@@ -512,6 +512,22 @@ svg {
   transition: stroke-dashoffset 0.2s linear;
 }
 
+@keyframes merge-bump {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.14);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.shutter-wrap.merge-bump {
+  animation: merge-bump 0.32s ease;
+}
+
 .pending-label {
   position: absolute;
   bottom: 100%;

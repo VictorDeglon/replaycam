@@ -426,6 +426,9 @@ class App {
     this.startPendingTicker();
     if (wasMerged) {
       this.toast(`Extended — clip will now be ~${fmtSeconds(job.endTs - job.startTs)} long`, { kind: 'success' });
+      this.shutterWrap.classList.remove('merge-bump');
+      void this.shutterWrap.offsetWidth; // restart animation if already mid-bump
+      this.shutterWrap.classList.add('merge-bump');
     }
   }
 
