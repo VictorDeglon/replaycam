@@ -1,0 +1,24 @@
+{
+  "name": "replaycam",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Always-on instant-replay camera: rolling pre-roll buffer, tap to save the moments before and after.",
+  "type": "module",
+  "scripts": {
+    "postinstall": "node scripts/copy-ffmpeg-core.mjs",
+    "dev": "vite",
+    "build": "npm run icons && tsc -b && vite build",
+    "preview": "vite preview --host",
+    "icons": "node scripts/make-icons.mjs"
+  },
+  "dependencies": {
+    "@ffmpeg/core": "^0.12.10",
+    "@ffmpeg/ffmpeg": "^0.12.15",
+    "@ffmpeg/util": "^0.12.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "vite": "^6.0.7",
+    "vite-plugin-pwa": "^0.21.1"
+  }
+}

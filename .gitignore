@@ -1,0 +1,11 @@
+node_modules
+dist
+dist-ssr
+*.local
+*.tsbuildinfo
+.DS_Store
+public/ffmpeg
+public/icons/*.png
+public/apple-touch-icon.png
+public/favicon-16.png
+public/favicon-32.png
