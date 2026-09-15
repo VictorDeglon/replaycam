@@ -82,6 +82,19 @@ svg {
   transform: scaleX(-1);
 }
 
+.shutter-flash {
+  position: absolute;
+  inset: 0;
+  background: white;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 8;
+}
+
+.shutter-flash.flash {
+  transition: opacity 0.4s ease-out;
+}
+
 .scrim-top,
 .scrim-bottom {
   position: absolute;
@@ -656,6 +669,11 @@ svg {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.15s ease;
+}
+
+.sheet-close:active {
+  transform: scale(0.88);
 }
 
 .sheet-close svg {
@@ -889,6 +907,11 @@ input[type='range']::-webkit-slider-thumb {
   background: #000;
   border: 1px solid var(--surface-border);
   aspect-ratio: 9 / 13;
+  transition: transform 0.12s ease;
+}
+
+.clip-card:active {
+  transform: scale(0.96);
 }
 
 .clip-card video {
@@ -983,6 +1006,19 @@ input[type='range']::-webkit-slider-thumb {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.15s ease;
+}
+
+.player-close:active {
+  transform: scale(0.88);
+}
+
+.pill-btn {
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.pill-btn:active {
+  transform: scale(0.95);
 }
 
 .player-close svg {

@@ -122,6 +122,7 @@ class App {
   shutterFill = el('div', 'shutter-fill');
   pendingLabel = el('div', 'pending-label');
   toastStack = el('div', 'toast-stack');
+  shutterFlashEl = el('div', 'shutter-flash');
   bufferRingFg!: SVGCircleElement;
 
   settingsSheet: HTMLElement | null = null;
@@ -147,6 +148,7 @@ class App {
       this.video,
       el('div', 'scrim-top'),
       el('div', 'scrim-bottom'),
+      this.shutterFlashEl,
       this.buildTopbar(),
       this.buildControls(),
       this.toastStack
@@ -403,8 +405,20 @@ class App {
 
   // ------------------------------------------------------------- capture
 
+  private triggerFlash(): void {
+    this.shutterFlashEl.classList.remove('flash');
+    this.shutterFlashEl.style.transition = 'none';
+    this.shutterFlashEl.style.opacity = '0.85';
+    requestAnimationFrame(() => {
+      this.shutterFlashEl.classList.add('flash');
+      this.shutterFlashEl.style.transition = '';
+      this.shutterFlashEl.style.opacity = '0';
+    });
+  }
+
   private onCapture(): void {
     if (!this.live || !this.bufferMgr) return;
+    this.triggerFlash();
     const job = this.bufferMgr.capture(this.settings.preRollSec * 1000, this.settings.postRollSec * 1000);
     const wasMerged = job.mergedCount > 1;
     this.currentJobId = job.id;
